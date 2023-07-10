@@ -1,0 +1,70 @@
+$base-color: #141415;
+$char-color: #7484a4;
+$selected-color: #48c6f7;
+
+.add {
+    margin: auto;
+    margin-left: 2.5%;
+    margin-bottom: 1rem;
+}
+
+div {
+    margin: auto;
+    width: 95%;
+}
+
+.example-table-container {
+    width: 100%;
+    position: relative;
+    max-height: 35rem;
+    overflow: auto;
+}
+
+table {
+    margin: auto;
+    width: 100%;
+}
+
+th {
+    background-color: $base-color !important;
+    color: $selected-color;
+    font-size: 18px;
+}
+
+.mat-cell {
+    width: 7rem;
+}
+
+.mat-row:hover .mat-cell {
+    background-color: rgba(0, 0, 0, .12) !important;
+}
+
+mat-toolbar-row {
+    padding: 0;
+    background-color: white;
+    border-top: 1px solid rgba(0, 0, 0, .12);
+}
+
+mat-paginator {
+    width: 100%;
+}
+
+mat-paginator-container {
+    padding: 0;
+}
+
+@media only screen and (max-width: 768px) {
+    mat-toolbar-row {
+        display: block;
+        height: 100%;
+    }
+}
+
+p {
+    padding: 0;
+    margin-left: 1rem;
+}
+
+a {
+    text-decoration: none;
+}

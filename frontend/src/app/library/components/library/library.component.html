@@ -1,0 +1,28 @@
+<ng-container *ngIf="items.length > 0">
+    <div class="buttons">
+      <button mat-raised-button color="primary" class="byDate" (click)="sortItemsByDate()">
+        Sort by date {{ dateSort ? '↑' : '↓' }}
+      </button>
+      <button mat-raised-button color="primary" class="byName" (click)="sortItemsByName()">
+        Sort by name {{ nameSort ? '↑' : '↓' }}
+      </button>
+    </div>
+
+    <mat-grid-list cols="{{cols}}" rowHeight="20rem">
+      <mat-grid-tile *ngFor="let element of items">
+        <a routerLink="/library/item/{{element.item._id}}">
+          <mat-card>
+            <img src="assets/images/{{element.item.principal_image}}">
+            <mat-card-title d-flex align-items-center>
+              {{element.item.name}} <br> Acquired on: {{element.date}}
+            </mat-card-title>
+          </mat-card>
+        </a>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <h1 *ngIf="items.length == 0">Library is empty</h1>
+</ng-container>
+
+<ng-container *ngIf="items.length == 0">
+  <h1>Your Library is Empty</h1>
+</ng-container>

@@ -1,0 +1,42 @@
+<mat-card>
+    <mat-card-title>
+        Checkout
+    </mat-card-title>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+        <form [formGroup]="submitForm" (ngSubmit)="finish()">
+            <mat-form-field appearance="fill">
+                <mat-label>NIF</mat-label>
+                <input matInput formControlName="nif" autocomplete="off">
+                <mat-error *ngIf="submitForm.controls['nif'].hasError('required')">
+                    Require NIF
+                </mat-error>
+                <mat-error *ngIf="submitForm.controls['nif'].hasError('pattern')">
+                    It must be 9 numbers
+                </mat-error>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Residence</mat-label>
+                <input matInput formControlName="residence" autocomplete="off">
+            </mat-form-field>
+
+
+            <section class="example-section" [formGroup]="submitForm">
+                <h4>Choose your payment method:</h4>
+                <mat-radio-group formControlName="payOption">
+                    <mat-radio-button value="paypal">Paypal</mat-radio-button>
+                    <mat-radio-button value="bitcoin">Bitcoin</mat-radio-button>
+                    <mat-radio-button value="mastercard">MasterCard</mat-radio-button>
+                    <mat-radio-button value="mastercard">Visa</mat-radio-button>
+                </mat-radio-group>
+            </section>
+
+            <button mat-stroked-button type="submit" [disabled]="!submitForm.valid">
+                <span>Finish</span>
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

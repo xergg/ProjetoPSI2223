@@ -1,0 +1,111 @@
+<mat-card>
+    <mat-card-title>
+        {{item.name}}
+    </mat-card-title>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content class="item">
+        <img src="/assets/images/{{item.principal_image}}">
+        <span>Description</span>
+        <p>{{item.description}}</p>
+        <p>Plataform: {{item.platform.join(', ')}}</p>
+        <p>Languages: {{item.languages.join(', ')}}</p>
+        <p>Rate: {{calculateAVGRate()}}/5</p>
+    </mat-card-content>
+    <div class="purchase-btn-wrapper">
+        <button mat-raised-button color="primary" class="purchase-btn" (click)="addToWishList()">
+            + Wishlist
+        </button>
+        <button mat-raised-button color="primary" class="purchase-btn" (click)="add()">
+            <span>€ {{item.price.toFixed(2)}}</span> | + Cart
+        </button>
+    </div>
+</mat-card>
+
+<mat-card>
+    <mat-card-title>
+        Write a opinion about the {{item.name}}
+    </mat-card-title>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content class="rate">
+        <form [formGroup]="submitForm" #formDirective="ngForm" (ngSubmit)="publish()">
+            <div class="example-label-container">
+                <label id="example-name-label" class="example-name-label">Rate</label>
+                <label class="example-value-label">{{submitForm.value.rate || 0}}</label>
+            </div>
+            <mat-slider class="example-margin" disabled="false" max="5" min="0" step="1" discrete="false"
+                showTickMarks="true">
+                <input matSliderThumb formControlName="rate" name="value">
+            </mat-slider>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Write opinion (optional)</mat-label>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5" maxlength="5000" formControlName="opinion"></textarea>
+            </mat-form-field>
+
+            <div class="right-align">
+                <button mat-raised-button [disabled]="!submitForm.valid" color="primary" class="publish" type="submit">
+                    <span>Publish</span>
+                </button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+<mat-card *ngFor="let rate of item.rates">
+    <mat-card-title>
+        Review by {{rate.user.name}}
+    </mat-card-title>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content class="rate">
+        <div class="opinion">
+            <p>Rate opinion: {{rate.rate}}</p>
+            <p *ngIf="rate.message != ''">Review opinion: </p>
+            <p *ngIf="rate.message != ''">{{rate.message}}</p>
+
+            <div>
+                <div class="rate-buttons">
+                    <button mat-mini-fab color="primary" (click)="addLike(rate)">
+                        <mat-icon>thumb_up</mat-icon>
+                    </button>
+                    <span class="like-count">{{getLikes(rate)}}</span>
+                </div>
+
+                <div class="rate-buttons">
+                    <button mat-mini-fab color="primary" (click)="addDislike(rate)">
+                        <mat-icon>thumb_down</mat-icon>
+                    </button>
+                    <span class="like-count">{{getDislikes(rate)}}</span>
+                </div>
+            </div>
+
+            <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        See the comments about this opinion
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <form [formGroup]="commentForm" #formDirective="ngForm" (ngSubmit)="addComment(item._id, rate)">
+                    <mat-form-field appearance="fill" class="answer">
+                        <mat-label>Answer</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                            cdkAutosizeMaxRows="5" maxlength="5000" formControlName="comment"></textarea>
+                    </mat-form-field>
+                    <button mat-mini-fab color="primary" [disabled]="!commentForm.valid" type="submit">
+                        <mat-icon>send</mat-icon>
+                    </button>
+                </form>
+
+                <div *ngFor="let answer of rate.answers">
+                    <p>{{answer.user.name}}: {{answer.message}}</p>
+                </div>
+            </mat-expansion-panel>
+        </div>
+    </mat-card-content>
+</mat-card>

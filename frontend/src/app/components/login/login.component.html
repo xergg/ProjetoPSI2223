@@ -1,0 +1,36 @@
+<div class="main-div">
+    <mat-card>
+        <mat-card-title>
+            Login
+        </mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="loginForm" #formDirective="ngForm" (ngSubmit)="login()" novalidate>
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name">
+                    <mat-error *ngIf="loginForm.controls['name'].hasError('required')">Need to put a name</mat-error>
+                    <mat-error *ngIf="loginForm.controls['name'].hasError('minlength')">Name must contain at least 3
+                        characters</mat-error>
+                    <mat-error *ngIf="loginForm.controls['name'].hasError('pattern')">Name must only contain
+                        alphanumeric characters</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                        autocomplete="off">
+                    <a class="type-toggle" (click)="toggleShow()">
+                        <mat-icon *ngIf="showPassword">visibility</mat-icon>
+                    </a>
+                    <a class="type-toggle" (click)="toggleShow()">
+                        <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
+                    </a>
+                    <mat-error *ngIf="loginForm.controls['name'].hasError('required')">Need to put a password</mat-error>
+                </mat-form-field>
+                <button [disabled]="!loginForm.valid" mat-raised-button type="submit">
+                    <span>Login</span>
+                </button>
+            </form>
+            <p>Don't have a Plasma account? <a class="router" routerLink="/signup">Register</a></p>
+        </mat-card-content>
+    </mat-card>
+</div>

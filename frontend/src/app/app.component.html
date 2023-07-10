@@ -1,0 +1,3 @@
+<app-login *ngIf="!isAuthenticated && isLogin"></app-login>
+<app-signup *ngIf="!isAuthenticated && isSignup"></app-signup>
+<app-dashboard *ngIf="isAuthenticated"></app-dashboard>

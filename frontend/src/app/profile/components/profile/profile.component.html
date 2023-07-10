@@ -1,0 +1,19 @@
+<div class="profile-container">
+    <div class="profile-picture">
+        <img src="assets/images/{{user.profile_image || 'default-profile-image.jpg'}}" alt="Profile Picture">
+    </div>
+    <div class="profile-info">
+        <h1>
+            {{user.name}}
+            <button mat-mini-fab color="primary" routerLink="/user/{{user._id}}/profile/edit">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </h1>
+        <div class="profile-links">
+            <a routerLink="/library/library">Library</a>
+            <a routerLink="/store/wishlist">Wishlist</a>
+            <a [routerLink]="getProfileFollowingLink()">Following</a>
+            <a routerLink="/followers">Followers</a>
+        </div>
+    </div>
+</div>

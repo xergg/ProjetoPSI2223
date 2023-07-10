@@ -1,0 +1,20 @@
+<div class="profile-container">
+    <div class="profile-picture">
+        <img src="assets/images/{{user.profile_image || 'default-profile-image.jpg'}}" alt="Profile Picture">
+    </div>
+    <div class="profile-info">
+        <h1>
+            {{user.name}}
+            <button mat-raised-button color="primary" (click)="followUser()">
+                {{ isFollowing ? 'Unfollow' : 'Follow' }}
+              </button>
+              
+          </h1>
+        <div class="profile-links">
+            <a routerLink="http://localhost:3030/user/:id/public-profile">Library</a>
+            <a routerLink="http://localhost:3030/user/:id/public-profile">Wishlist</a>
+            <a routerLink="http://localhost:3030/user/:id/public-profile">Following</a>
+            <a routerLink="http://localhost:3030/user/:id/public-profile">Followers</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<button mat-raised-button color="primary" class="add" routerLink="/store/cart/finish">
+  Checkout
+</button>
+
+<div class="mat-elevation-z3">
+  <div class="example-table-container">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element">
+          <a routerLink="/store/item/{{element.item._id}}">{{element.item.name}}</a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Type">
+        <th mat-header-cell *matHeaderCellDef> Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.item.type}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Quantity">
+        <th mat-header-cell *matHeaderCellDef> Quantity </th>
+        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.item.price}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Add">
+        <th mat-header-cell class="last" *matHeaderCellDef> Add </th>
+        <td mat-cell class="last" *matCellDef="let element">
+          <button mat-mini-fab color="primary" (click)="add(element)">
+            +
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Remove">
+        <th mat-header-cell class="last" *matHeaderCellDef> Remove </th>
+        <td mat-cell class="last" *matCellDef="let element"> 
+          <button mat-mini-fab color="primary" (click)="remove(element)">
+            -
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <mat-toolbar>
+    <mat-toolbar-row>
+
+      <p>Total: {{ total() }}</p>
+      <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons
+        aria-label="Select page of periodic elements">
+      </mat-paginator>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

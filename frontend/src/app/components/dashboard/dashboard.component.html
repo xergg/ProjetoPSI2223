@@ -1,0 +1,61 @@
+<mat-toolbar class="mat-elevation-z8">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+        <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+    </button> PLASMA
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+        <div class="menu-buttons">
+
+            <button mat-button class="menu-button" routerLinkActive="list-item-active" routerLink="/store/store">
+                <mat-icon>shopping_bag</mat-icon>
+                <span>STORE</span>
+            </button>
+
+            <button mat-button class="menu-button" routerLinkActive="list-item-active" routerLink="/library/library">
+                <mat-icon>videogame_asset</mat-icon>
+                <span>LIBRARY</span>
+            </button>
+
+            <button mat-button class="menu-button" routerLinkActive="list-item-active" [routerLink]="getProfileFollowingLink()">
+                <mat-icon>group_add</mat-icon>
+                <span>FOLLOWING</span>
+            </button>
+            
+            <button mat-button class="menu-button" routerLinkActive="list-item-active" [routerLink]="">
+                <mat-icon>group</mat-icon>
+                <span>FOLLOWERS</span>
+            </button>
+
+            <button mat-button class="menu-button" routerLinkActive="list-item-active" routerLink="/store/cart">
+                <mat-icon>shopping_cart</mat-icon>
+                <span>CART</span>
+            </button>
+            
+            <button mat-button class="menu-button" routerLinkActive="list-item-active" routerLink="/store/wishlist">
+                <mat-icon>cake</mat-icon>
+                <span>WISHLIST</span>
+            </button>
+
+            <button mat-button class="menu-button" routerLinkActive="list-item-active" [routerLink]="getProfileLink()">
+                <mat-icon>person</mat-icon>
+                <span>PROFILE</span>
+            </button>
+        </div>
+
+        <div class="logout-button">
+            <button mat-button (click)="logout()" class="menu-button logout">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Logout</span>
+            </button>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div class="content mat-elevation-z8">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

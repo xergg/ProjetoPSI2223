@@ -1,0 +1,67 @@
+<div class="main-div">
+    <mat-card>
+        <mat-card-title>
+            Create account
+        </mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="signupForm" #formDirective="ngForm" (ngSubmit)="signup()" novalidate>
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name">
+                    <mat-error *ngIf="signupForm.controls['name'].hasError('required')">Need to put a name</mat-error>
+                    <mat-error *ngIf="signupForm.controls['name'].hasError('minlength')">Name must contain at least 3
+                        characters</mat-error>
+                    <mat-error *ngIf="signupForm.controls['name'].hasError('pattern')">Name must only contain
+                        alphanumeric characters</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                        autocomplete="off">
+                    <a class="type-toggle" (click)="toggleShow()">
+                        <mat-icon *ngIf="showPassword">visibility</mat-icon>
+                    </a>
+                    <a class="type-toggle" (click)="toggleShow()">
+                        <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
+                    </a>
+                </mat-form-field>
+                <mat-label class="col" [ngStyle]="{'color': signupForm.controls['password'].hasError('required') || 
+                signupForm.controls['password'].hasError('minlength') ? 'red' : '#00cf00'}">
+                    <mat-icon>
+                        {{ signupForm.controls['password'].hasError('required') ||
+                        signupForm.controls['password'].hasError('minlength') ? 'cancel' : 'check_circle' }}
+                    </mat-icon>
+                    <span>Must contain at least 8 characters</span>
+                </mat-label>
+                <mat-label class="col"
+                    [ngStyle]="{'color': signupForm.controls['password'].hasError('required') || signupForm.controls['password'].hasError('hasNumber') ? 'red' : '#00cf00'}">
+                    <mat-icon>
+                        {{ signupForm.controls['password'].hasError('required') ||
+                        signupForm.controls['password'].hasError('hasNumber') ? 'cancel' : 'check_circle' }}
+                    </mat-icon>
+                    <span>Must contain at least one number</span>
+                </mat-label>
+                <mat-label class="col"
+                    [ngStyle]="{'color': signupForm.controls['password'].hasError('required') || signupForm.controls['password'].hasError('hasCapitalCase') ? 'red' : '#00cf00'}">
+                    <mat-icon>
+                        {{ signupForm.controls['password'].hasError('required') ||
+                        signupForm.controls['password'].hasError('hasCapitalCase') ? 'cancel' : 'check_circle' }}
+                    </mat-icon>
+                    <span>Must contain at least one capital letter</span>
+                </mat-label>
+                <mat-label class="col"
+                    [ngStyle]="{'color': signupForm.controls['password'].hasError('required') || signupForm.controls['password'].hasError('hasSmallCase') ? 'red' : '#00cf00'}">
+                    <mat-icon>
+                        {{ signupForm.controls['password'].hasError('required') ||
+                        signupForm.controls['password'].hasError('hasSmallCase') ? 'cancel' : 'check_circle' }}
+                    </mat-icon>
+                    <span>Must contain at least one lowercase letter</span>
+                </mat-label>
+                <button [disabled]="!signupForm.valid" mat-raised-button type="submit">
+                    <span>Create account</span>
+                </button>
+            </form>
+            <p>Already have a Plasma account? <a class="router" routerLink="/login">Login</a></p>
+        </mat-card-content>
+    </mat-card>
+</div>
